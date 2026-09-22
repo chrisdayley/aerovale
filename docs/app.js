@@ -1,5 +1,5 @@
 import {AIRPORTS,PLANES,RIVALS,QUESTS,UPGRADES,EVENTS} from './data.js';
-import * as E from './engine.js?v=7';
+import * as E from './engine.js?v=7.1';
 import {airportImage,airportCredit} from './imagery.js';
 const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=(n,short=false)=>{const a=Math.abs(n),sign=n<0?'−':'';return sign+'$'+(short&&a>=1e6?(a/1e6).toFixed(a>=1e7?1:2)+'m':short&&a>=1000?Math.round(a/1000)+'k':Math.round(a).toLocaleString('en-US'));};
