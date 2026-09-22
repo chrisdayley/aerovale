@@ -50,7 +50,7 @@ node tests/engine.test.mjs
 node tests/expansion.test.mjs
 ```
 
-25 checks cover the first-flight loop, earnings reconciliation, route and model restrictions, multi-route scheduling, paused departures, airport income, AI behavior, buyouts, leases, ticket pricing, credit, objectives, save validation, long-term simulation, opening dates, catalog completeness, generational improvements, obsolescence and trade-ins.
+29 engine and progression checks cover the first-flight loop, earnings reconciliation, route and model restrictions, multi-route scheduling, paused departures, airport income, AI behavior, buyouts, leases, ticket pricing, credit, objectives, save validation, long-term simulation, opening dates, catalog completeness, generational improvements, obsolescence and trade-ins.
 
 ## Credits
 
@@ -69,3 +69,9 @@ On iPhone, open the game in Safari and choose **Share → Add to Home Screen**. 
 `dist/` contains editable source and static assets. GitHub Pages serves the identical `docs/` release copy from the `main` branch. To prepare another release, run `node scripts/prepare-pages.mjs`, commit both directories, and push. No keys or backend are needed.
 
 Run all checks with `node --test tests/*.test.mjs`. The visual asset tests verify coverage of all 400 aircraft and 600 airports, image provenance, and offline installation/fallback without deleting other games’ caches. Artwork provenance and exact generation prompts are linked from the in-game credits page.
+
+## Direct route assignment
+
+Owned route cards and route details opened from the map now include an aircraft picker and **Assign & fly**. The picker prefers idle compatible aircraft and shows unavailable aircraft with a reason. Assignment appends to an existing compatible rotation, preserves the cabin, quotes any ferry cost, and starts automatic departures. Assigned routes show their aircraft and a direct management button.
+
+This update keeps the same URL, `aerovale-save-v1` storage key and version-one save format. Existing money, planes, routes, progress and active flights load without a restart or import. The service-worker cache version changes only cached game files; it does not clear saved games.

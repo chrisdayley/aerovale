@@ -30,3 +30,15 @@ body{font-size:16px}.stat-label{font-size:13px}.stat-meta{font-size:12px;line-he
 @media(max-width:650px){.aircraft-art.large{width:calc(100% + 40px)}.modal-head{padding:17px 20px}.modal-body .breakdown{margin:14px 0;padding:12px}.modal-body .breakdown .ledger-row{font-size:12px}.modal-body .data-grid{padding:15px 0}.modal-footer button{font-size:12px}#toast{bottom:calc(90px + env(safe-area-inset-bottom))}}
 .map-airport{pointer-events:bounding-box}.map-airport text{pointer-events:auto;cursor:pointer}
 .map-destination>div{flex-wrap:wrap}.map-destination .small{flex:1;white-space:nowrap}.footer a{color:#7187a8;text-decoration:none}.footer a:hover{text-decoration:underline}
+
+/* Direct route-to-aircraft assignment, shared by route cards and map details. */
+.route-assignment{display:grid;gap:10px;padding:16px;margin:18px 0 6px;background:#edf3ff;border:1px solid #d6e3fb;border-radius:14px;min-width:0}
+.route-assignment label{display:flex;align-items:center;gap:8px;margin:0;font-size:14px;font-weight:700;color:#244d87}
+.route-assignment select{width:100%;max-width:100%;min-width:0;background:#fff;font-size:14px}
+.route-assignment>.primary{width:100%;justify-content:center;min-height:44px}
+.route-assignment .note{margin:0;font-size:13px;line-height:1.5}
+.assigned-route{grid-template-columns:64px minmax(0,1fr);align-items:center}
+.assigned-route img{width:64px;height:50px;object-fit:contain;border-radius:8px;background:#f6f9ff}
+.assigned-route strong,.assigned-route small{display:block;line-height:1.5}
+.assigned-route strong{font-size:14px}.assigned-route small{font-size:12px;color:#63718b}
+.assigned-route>button{grid-column:1/-1;min-height:42px}
