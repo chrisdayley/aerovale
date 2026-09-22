@@ -82,7 +82,7 @@ Each unordered airport connection has exactly five licenses shared by the player
 
 Route cards, route details and map previews show remaining supply. Owned route cards support purchasing another available license and assigning an additional plane directly. The save key, version and live URL stay unchanged.
 
-Rivals evaluate incremental operating profit after leases, competition, and reduced earnings on their own existing flights. They preserve an operating reserve, reassess a bid before spending, and upgrade aircraft only when the resulting profit justifies the cost. They are deliberately imperfect: each scouts only 8–12 markets from a limited shortlist, makes varied estimates, and can choose among several reasonable options. Purchase intentions appear 12–48 game hours ahead. New bids have a 12–24-hour gap, repeated purchases on a connection wait 5–12 days, and each personality limits its concentration to two or three licenses there.
+Rivals evaluate incremental operating profit after leases, competition, and reduced earnings on their own existing flights. They preserve an operating reserve, reassess a bid before spending, and upgrade aircraft only when the resulting profit justifies the cost. They are deliberately imperfect: each scouts only 8–12 markets from a limited shortlist, makes varied estimates, and can choose among several reasonable options. Purchase intentions appear 12–48 game hours ahead. Each airline has its own investment schedule and an 18–72-hour scouting interval depending on personality; repeated purchases on a connection wait 5–12 days, and each personality limits its concentration to two or three licenses there.
 
 - Meridian: conservative regional routes around Denver, smaller aircraft, larger cash reserve.
 - Solstice: patient international expansion, longer routes, selective investment.
@@ -91,3 +91,11 @@ Rivals evaluate incremental operating profit after leases, competition, and redu
 - Kestrel: less crowded and overlooked markets, a wider variety of bets.
 
 The full suite now includes 43 checks covering gameplay, expansion, assets/offline behavior, route scarcity, rival strategy and save compatibility. Browser QA covers sold-out routes, last-slot purchasing, a second aircraft on a second license, save reload, and mobile layout. Test saves are isolated from the published game.
+
+## Independent rival expansion
+
+The shared expansion queue accidentally made all five airlines wait on one another, averaging about ten game days between purchases per airline. Rivals now maintain independent plans, decision counters and review times. Nimbus reinvests most frequently; Solstice waits longer. Typical cycles take about 2–5 game days when profitable, affordable opportunities exist, with the same 12–48-hour advance warning and limits on repeated purchases.
+
+The Rival airlines screen shows each carrier's target and countdown, next market review, or why it is waiting. Route cards recognize every pending rival plan. New saves stagger the first reviews; existing saves begin independent reviews gradually over 3–15 game hours, retain any previously announced bid, and never receive a burst of retroactive purchases. The storage key, save version, player purchases and flight state are unchanged.
+
+All 51 checks pass, including independent growth past four licenses, different expansion rates, legacy-save migration, preservation of pending bids and player progress, competing bids for the last slot, retries after an unaffordable review, and deterministic save/reload.

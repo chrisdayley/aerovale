@@ -58,7 +58,7 @@ test('An affordable, profitable bid can acquire the fifth slot and never a sixth
 test('Long-term rival expansion respects finite supply and produces visible strategic plans',()=>{
  const s=setup();for(let day=0;day<15;day++)E.advance(s,1440);const connections=new Set([...s.routes,...s.rivals.flatMap(ai=>ai.routes)].map(r=>r.id));
  for(const id of connections){const [a,b]=id.split('-');assert(E.slots(s,a,b)<=5,id);}
- assert(s.rivals.some(ai=>ai.routes.length>2));assert(s.log.some(l=>/profitable/.test(l.text)));E.validateSave(JSON.parse(JSON.stringify(s)));
+ assert(s.rivals.every(ai=>ai.routes.length>4));assert(s.log.some(l=>/profitable/.test(l.text)));E.validateSave(JSON.parse(JSON.stringify(s)));
 });
 
 test('Rivals modernize only when the extra operating profit justifies aircraft cost',()=>{
@@ -75,5 +75,5 @@ test('Rival personalities choose different markets and cannot instantly stack a 
 });
 
 test('Limited scouting varies sensible choices instead of repeating one perfect target',()=>{
- const s=setup(),ai=s.rivals[0],picks=new Set();for(let turn=0;turn<12;turn++){s.aiTurn=turn;const c=E.chooseAIRoute(s,ai);assert(c&&c.daily>0);picks.add(E.key(c.a,c.b));const restored=E.validateSave(JSON.parse(JSON.stringify(s)));assert.deepEqual(E.chooseAIRoute(restored,restored.rivals[0]),c);}assert(picks.size>=3);
+ const s=setup(),ai=s.rivals[0],picks=new Set();for(let turn=0;turn<12;turn++){ai.expansionTurn=turn;const c=E.chooseAIRoute(s,ai);assert(c&&c.daily>0);picks.add(E.key(c.a,c.b));const restored=E.validateSave(JSON.parse(JSON.stringify(s)));assert.deepEqual(E.chooseAIRoute(restored,restored.rivals[0]),c);}assert(picks.size>=3);
 });
