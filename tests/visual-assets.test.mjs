@@ -19,7 +19,7 @@ test('all 600 destinations have an image and distinguish exact photos from conce
 test('service worker installs every runtime asset, keeps other games caches, and handles offline navigation',async()=>{
  const source=fs.readFileSync(path.join(root,'sw.js'),'utf8'),currentCache=source.match(/const CACHE='([^']+)'/)[1];
  const handlers={},stored=new Map(),deleted=[];let offline=false;let claimed=false;
- const cache={addAll:async urls=>{for(const url of urls){const file=url==='./'?'index.html':url.slice(2);assert.ok(fs.existsSync(path.join(root,file)),url);stored.set(new URL(url,'https://example.test/aerovale/').href,new Response(fs.readFileSync(path.join(root,file))));}},match:async req=>stored.get(new URL(typeof req==='string'?req:req.url,'https://example.test/aerovale/').href),put:async(req,res)=>stored.set(req.url,res)};
+ const cache={addAll:async urls=>{for(const url of urls){const file=url==='./'?'index.html':url.slice(2).split('?')[0];assert.ok(fs.existsSync(path.join(root,file)),url);stored.set(new URL(url,'https://example.test/aerovale/').href,new Response(fs.readFileSync(path.join(root,file))));}},match:async req=>stored.get(new URL(typeof req==='string'?req:req.url,'https://example.test/aerovale/').href),put:async(req,res)=>stored.set(req.url,res)};
  const context={URL,Response,self:{location:{origin:'https://example.test'},addEventListener:(n,fn)=>handlers[n]=fn,skipWaiting:async()=>{},clients:{claim:async()=>{claimed=true}}},caches:{open:async()=>cache,keys:async()=>['aerovale-old','other-game-cache',currentCache],delete:async k=>deleted.push(k)},fetch:async()=>{if(offline)throw Error('offline');return new Response('online');}};
  vm.runInNewContext(source,context);
  let pending;handlers.install({waitUntil:p=>pending=p});await pending;

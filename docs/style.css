@@ -42,3 +42,13 @@ body{font-size:16px}.stat-label{font-size:13px}.stat-meta{font-size:12px;line-he
 .assigned-route strong,.assigned-route small{display:block;line-height:1.5}
 .assigned-route strong{font-size:14px}.assigned-route small{font-size:12px;color:#63718b}
 .assigned-route>button{grid-column:1/-1;min-height:42px}
+
+/* Shared, finite license supply for each airport connection. */
+.route-supply{padding:14px 0;margin:12px 0;border-top:1px solid #e1e7f0;border-bottom:1px solid #e1e7f0}
+.route-supply>div:first-child{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13px;color:#65748a}
+.route-supply strong{font-size:13px;color:#244d87}.route-supply strong.negative{color:#a54143}
+.license-slots{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin:10px 0}
+.license-slots>span{display:flex;align-items:center;justify-content:center;height:30px;border-radius:6px;border:1px dashed #c6d2e3;background:#f3f6fb;color:#7c8eaa}
+.license-slots .yours{background:#386aeb;color:#fff;border:1px solid #386aeb}.license-slots .claimed{background:#f6e3c1;color:#96692c;border:1px solid #edc98e}
+.license-slots .icon{width:15px;height:15px}.route-supply p{margin:0;font-size:12px;line-height:1.5;color:#63718b}
+.map-destination .map-license-count{font-size:12px;line-height:1.5;margin-top:-3px}

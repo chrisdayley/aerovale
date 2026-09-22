@@ -24,7 +24,7 @@ Open http://localhost:5188. Serve the directory over HTTP; ES modules and the ma
 
 ## Systems
 
-Aircraft purchase, leasing, selling and trade-ins; three cabin configurations; route licenses, pricing, capacity, competition and range constraints; round-trip rotations with up to six routes from a common base; automatic fuel purchasing and maintenance; lasting service reputation; five AI rivals with treasury, flights, preannounced expansion and fleet modernization; three licenses per connection and rival buyouts; airport ownership and airline revenue shares; six permanent airline improvements; six cycling market conditions; business credit and repayment; 24 rewarded campaign objectives; a one-time recovery grant; finances, activity feed, route map, release calendar and catalog filters.
+Aircraft purchase, leasing, selling and trade-ins; three cabin configurations; route licenses, pricing, capacity, competition and range constraints; round-trip rotations with up to six routes from a common base; automatic fuel purchasing and maintenance; lasting service reputation; five AI rivals with treasury, flights, preannounced expansion and fleet modernization; five permanent licenses per connection shared across all airlines, with multiple licenses per airline and no purchases after sellout; airport ownership and airline revenue shares; six permanent airline improvements; six cycling market conditions; business credit and repayment; 24 rewarded campaign objectives; a one-time recovery grant; finances, activity feed, route map, release calendar and catalog filters.
 
 The player can operate up to 150 aircraft. AI fleet expansion limits grow with campaign age, up to 80 routes per rival. These are performance and balance limits.
 
@@ -50,7 +50,7 @@ node tests/engine.test.mjs
 node tests/expansion.test.mjs
 ```
 
-29 engine and progression checks cover the first-flight loop, earnings reconciliation, route and model restrictions, multi-route scheduling, paused departures, airport income, AI behavior, buyouts, leases, ticket pricing, credit, objectives, save validation, long-term simulation, opening dates, catalog completeness, generational improvements, obsolescence and trade-ins.
+40 engine, progression and strategy checks cover the first-flight loop, earnings reconciliation, route and model restrictions, multi-route scheduling, paused departures, airport income, AI behavior, finite shared supply, multi-license capacity, leases, ticket pricing, credit, objectives, save validation, long-term simulation, opening dates, catalog completeness, generational improvements, obsolescence and trade-ins.
 
 ## Credits
 
@@ -75,3 +75,19 @@ Run all checks with `node --test tests/*.test.mjs`. The visual asset tests verif
 Owned route cards and route details opened from the map now include an aircraft picker and **Assign & fly**. The picker prefers idle compatible aircraft and shows unavailable aircraft with a reason. Assignment appends to an existing compatible rotation, preserves the cabin, quotes any ferry cost, and starts automatic departures. Assigned routes show their aircraft and a direct management button.
 
 This update keeps the same URL, `aerovale-save-v1` storage key and version-one save format. Existing money, planes, routes, progress and active flights load without a restart or import. The service-worker cache version changes only cached game files; it does not clear saved games.
+
+## Finite route supply and rival personalities
+
+Each unordered airport connection has exactly five licenses shared by the player and all five rivals. Either direction uses the same pool. Airlines can hold multiple licenses; each player license supports one assigned aircraft. A connection is permanently sold out when all five are held. The premium buyout option has been removed. Selling an aircraft does not release its route license. Existing routes keep their original IDs, purchase costs, flight history and assignments; saves without a license-count field are read as owning one license.
+
+Route cards, route details and map previews show remaining supply. Owned route cards support purchasing another available license and assigning an additional plane directly. The save key, version and live URL stay unchanged.
+
+Rivals evaluate incremental operating profit after leases, competition, and reduced earnings on their own existing flights. They preserve an operating reserve, reassess a bid before spending, and upgrade aircraft only when the resulting profit justifies the cost. They are deliberately imperfect: each scouts only 8–12 markets from a limited shortlist, makes varied estimates, and can choose among several reasonable options. Purchase intentions appear 12–48 game hours ahead. New bids have a 12–24-hour gap, repeated purchases on a connection wait 5–12 days, and each personality limits its concentration to two or three licenses there.
+
+- Meridian: conservative regional routes around Denver, smaller aircraft, larger cash reserve.
+- Solstice: patient international expansion, longer routes, selective investment.
+- Nimbus: efficient high-volume connections, competitive capacity expansion.
+- Pacifica: Asia/Oceania hub growth and patient capacity additions.
+- Kestrel: less crowded and overlooked markets, a wider variety of bets.
+
+The full suite now includes 43 checks covering gameplay, expansion, assets/offline behavior, route scarcity, rival strategy and save compatibility. Browser QA covers sold-out routes, last-slot purchasing, a second aircraft on a second license, save reload, and mobile layout. Test saves are isolated from the published game.
