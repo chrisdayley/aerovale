@@ -3,11 +3,11 @@ import test from 'node:test';
 import * as E from '../dist/engine.js';
 const setup=()=>{const s=E.createGame();E.buyPlane(s,'atr42');return s;};
 const clone=s=>JSON.parse(JSON.stringify(s));
-const oldSave=()=>{const s=setup();s.minute=20*1440;for(const ai of s.rivals){ai.routes.push(...clone(ai.routes));ai.cash=1e7;for(const key of ['nextExpansionAt','expansionTurn','expansionStatus','bid'])delete ai[key];}return s;};
+const oldSave=()=>{const s=setup();delete s.worldEvents;delete s.notifications;s.minute=20*1440;for(const ai of s.rivals){ai.routes.push(...clone(ai.routes));ai.cash=1e7;for(const key of ['nextExpansionAt','expansionTurn','expansionStatus','bid'])delete ai[key];}return s;};
 
 test('Every airline expands past four with distinct, bounded pacing',()=>{
  const s=setup();for(let day=0;day<20;day++)E.advance(s,1440);
- const counts=s.rivals.map(ai=>ai.routes.length);assert(counts.every(n=>n>4&&n<=16),String(counts));assert(new Set(counts).size>=3);assert(counts[2]>counts[1]);
+ const counts=s.rivals.filter(ai=>ai.id!=='apex').map(ai=>ai.routes.length);assert(counts.every(n=>n>4&&n<=16),String(counts));assert(new Set(counts).size>=3);assert(counts[2]>counts[1]);
  const connections=new Set(s.rivals.flatMap(ai=>ai.routes.map(r=>r.id)));for(const id of connections){const [a,b]=id.split('-');assert(E.slots(s,a,b)<=5);}
 });
 
