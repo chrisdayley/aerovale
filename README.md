@@ -121,3 +121,17 @@ Strategy credits develop three branches—Regional powerhouse, Signature service
 Route mastery uses existing flight history: 10, 40 and 120 completed round trips confer 2%, 4% and 6% extra ticket revenue on that connection. Its progress appears in route cards, route details and Career. A new flight-deck area highlights active commissions, spendable credits and an optional aircraft savings goal. Any catalog aircraft can be pinned from its purchase dialog, including future models. Away briefings include completed contracts and mastery gains; career notifications persist alongside airport and model releases.
 
 The first contract can complete in one profitable round trip (about 48 seconds at normal speed for a new ATR 42 flying SLC–DEN). Later tasks require changing the way the fleet operates, while route mastery and chosen aircraft purchases provide longer goals. There are no login streaks or forced save resets. The version-one save key is unchanged. New module: `dist/career.js`; regression coverage: `tests/career.test.mjs`.
+
+## Individual airport development
+
+Every owned airport supports three paths with three levels each (nine total developments):
+
+- **Terminal expansion:** +20% independent-carrier traffic and +5% passenger demand on touching routes per level. Costs 18%, 32% and 50% of that airport’s original purchase price.
+- **Retail district:** +0.5 percentage points of local revenue share per level. Costs 12%, 24% and 40% of original airport price. Stacks with the existing airline-wide retail partnership, for a maximum 5.5% share at a fully developed airport with that partnership.
+- **Ground services:** −8% of the ground-time portion of a round trip per level at each endpoint. Costs 10%, 18% and 30% of original airport price. Two fully developed endpoints can reduce ground time by 48%; cruise time remains unchanged.
+
+Prices round to the nearest $1,000. Upgrades require ownership and sufficient cash, complete immediately, and increase recorded airport asset value by their actual cost. Benefits apply to all carriers using the airport. Existing in-flight quotes stay fixed; airport revenue share applies to arrivals and ongoing independent traffic. The five-license connection limit is unchanged.
+
+Owned airport cards have **Manage & upgrade**, development progress and current asset value. Airport details show an evolving terminal/retail/ground-service diagram, before/after daily-income estimates, current share, clear prices and capped upgrade controls. Airport stages progress from Base airport to Improved, Developed, Major hub and Flagship hub. Existing airports start with their current income and no purchased developments; the optional development field preserves version-one saves without migrations or resets.
+
+All 85 checks pass, including ten new checks covering exact costs, scope, income, actual player/rival landing fees, preservation of airborne quotes, preview accuracy, full development, validation and saved/away progress. Mobile QA covers acquisition, all nine purchases, the completed airport, reload persistence and portfolio presentation.
